@@ -1,0 +1,24 @@
+{% extends 'blog/index.html' %}
+
+{% block title %}dashboard{% endblock %}
+
+
+{% block content %}
+    <h1 class="text-2xl font-semibold text-black text-center">Your Blog</h1>
+    <a href="{% url 'dashboard:newblog' %}" class="text-white bg-blue-500 px-5 py-3 rounded-lg mt-14 inline-block">add your blog</a>
+    <div class="grid grid-cols-4 gap-4 items-center mt-8">
+        {% for blog in blogs %}
+            <div class="flex gap-4 items-center">
+                <div class="max-w-[170px]"><img class="w-[500px] h-[150px] rounded-2xl" src="{{blog.image.url}}" alt=""></div>
+                <div class="w-3xl">
+                    <h1 class="font-semibold">{{blog.title}}</h1>
+                    <p class="text-[.8rem] mt-1 text-slate-600">{{blog.subtitle}}</p>
+                    <div class="flex gap-2">
+                        <a href="{% url 'dashboard:updateblog' blog.id %}" class="bg-orange-500 text-[.9rem] text-white px-4 py-1 rounded-md inline-block mt-4">update</a>
+                        <a href="{% url 'dashboard:deleteblog' blog.id %}" class="bg-red-500 text-[.9rem] text-white px-4 py-1 rounded-md inline-block mt-4">delete</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
